@@ -1,0 +1,68 @@
+/* 不法行為法を学ぶ：見た目 */
+:root { --ink: #24302c; --sub: #5d6a65; --line: #d6ded9; --bg: #f7f9f8; --card: #fff; --accent: #2e6b5e; --soft: #e6f0ec; --ok: #2f7d4f; --ng: #b5452f; }
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #e7eeeb; --sub: #a9b7b1; --line: #3a4743; --bg: #161c1a; --card: #1f2724; --accent: #7cc2ad; --soft: #24342f; --ok: #6fca93; --ng: #f08a73; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "BIZ UDPGothic", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif; line-height: 1.8; }
+.top { position: sticky; top: 0; z-index: 2; background: var(--card); border-bottom: 1px solid var(--line); padding: 12px 16px 0; }
+.top h1 { margin: 0 0 8px; font-size: 1.25rem; }
+.tabs { display: flex; gap: 4px; overflow-x: auto; }
+.tabs button { border: 0; background: none; color: var(--sub); font: inherit; padding: 8px 14px; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+.tabs button.on { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+main { max-width: 860px; margin: 0 auto; padding: 16px; }
+.pane { display: none; }
+.pane.on { display: block; }
+.note { font-size: .9rem; color: var(--sub); background: var(--soft); border-radius: 8px; padding: 10px 14px; }
+.toc { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; padding: 0; list-style: none; }
+.toc a { display: inline-block; font-size: .85rem; color: var(--accent); border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; text-decoration: none; background: var(--card); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 16px 0; }
+.card h2 { margin: 0; font-size: 1.1rem; }
+.ref { font-size: .8rem; color: var(--sub); margin: 2px 0 8px; }
+.card p { margin: .4em 0; }
+figure { margin: 14px 0 4px; }
+figcaption { font-size: .85rem; color: var(--sub); font-weight: 700; margin-bottom: 6px; }
+/* 図：流れ */
+.flow { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+.flow .box { border: 2px solid var(--accent); border-radius: 10px; padding: 8px 12px; background: var(--card); }
+.flow .box.goal { background: var(--accent); color: var(--card); }
+.flow .box b { display: block; }
+.flow .box small { color: inherit; opacity: .8; }
+.flow .arrow { text-align: center; color: var(--accent); line-height: 1.4; font-size: 1.1rem; }
+/* 図：比べる表 */
+.cmp { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.cmp th, .cmp td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
+.cmp th { background: var(--soft); }
+.cmp-wrap { overflow-x: auto; }
+/* 図：木 */
+.tree { display: flex; flex-direction: column; gap: 8px; }
+.tree .root { align-self: flex-start; background: var(--accent); color: var(--card); border-radius: 8px; padding: 4px 14px; font-weight: 700; }
+.tree .branch { margin-left: 18px; border-left: 3px solid var(--accent); padding-left: 12px; }
+.tree .branch b { display: block; }
+.tree .branch ul { margin: 2px 0 0; padding-left: 1.2em; }
+/* 図：時の帯 */
+.bars { display: flex; flex-direction: column; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 13em) 1fr; gap: 8px; align-items: center; font-size: .9rem; }
+.bar { height: 22px; border-radius: 6px; background: var(--accent); color: var(--card); font-size: .8rem; font-weight: 700; padding: 0 8px; display: flex; align-items: center; min-width: 3.5em; }
+/* 問題 */
+.score { position: sticky; top: 92px; z-index: 1; background: var(--soft); border-radius: 8px; padding: 6px 12px; font-weight: 700; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.score button { font: inherit; font-size: .85rem; border: 1px solid var(--accent); background: var(--card); color: var(--accent); border-radius: 6px; padding: 0 10px; cursor: pointer; }
+.q-num { font-size: .8rem; color: var(--sub); }
+.q-text { font-weight: 700; margin: 2px 0 10px; }
+.opts { display: grid; gap: 6px; }
+.opts button { text-align: left; font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.opts.ox { grid-template-columns: 1fr 1fr; }
+.opts.ox button { text-align: center; font-size: 1.4rem; font-weight: 700; }
+.opts button:disabled { cursor: default; }
+.opts button.right { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--card)); }
+.opts button.wrong { border-color: var(--ng); background: color-mix(in srgb, var(--ng) 14%, var(--card)); }
+.result { margin-top: 10px; border-left: 4px solid var(--ok); padding: 4px 10px; }
+.result.ng { border-left-color: var(--ng); }
+.result a { color: var(--accent); font-size: .85rem; }
+@media print {
+  .top { position: static; }
+  .tabs, .score button { display: none; }
+  .pane { display: block !important; }
+  .card { break-inside: avoid; }
+}
+.sources a { color: var(--accent); word-break: break-all; }
